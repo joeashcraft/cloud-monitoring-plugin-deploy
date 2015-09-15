@@ -1,10 +1,10 @@
 type        : agent.apache
-label       : 'Apache Status'
+label       : 'Apache Metrics'
 disabled    : false
 period      : 60
 timeout     : 30
 details     :
-    url     : http://localhost:{{apache_port}}/server-status
+    url     : http://localhost:{{apache_port}}/{{server-status}}
 alarms      :
     alarm1  :
         label                 : 'Apache Idle Workers'
@@ -18,15 +18,3 @@ alarms      :
             return new AlarmStatus(WARNING, 'Fewer than 5 idle workers.');
           }
           return new AlarmStatus(OK, 'More than 5 idle workers: #{idle_workers}.');
-    alarm2  :
-        label                 : 'Apache MaxClients'
-        notification_plan_id  : npTechnicalContactsEmail
-        criteria              : |
-          :set consecutiveCount=5
-          if (metric['idle_workers'] < 1) {
-            return new AlarmStatus(CRITICAL, 'Apache reached MaxClients; No idle workers!');
-          }
-          if (metric['idle_workers'] < 5) {
-            return new AlarmStatus(WARNING, 'Apache is near MaxClients: #{idle_workers} idle workers.');
-          }
-          return new AlarmStatus(OK, 'Apache is OK: #{idle_workers} idle workers.');
