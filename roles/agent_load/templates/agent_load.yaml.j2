@@ -4,16 +4,14 @@ disabled    : false
 period      : 60
 timeout     : 10
 alarms      :
-    high-load-avg  :
+    alarm1  :
         label                 : 'High Load Avg'
         notification_plan_id  : {{notification_plan}}
         criteria              : |
-            if (metric['15m'] > 10) {
-              return new AlarmStatus(WARNING, '15 Minute Load Average is #{15m}');
-            }
-            if (metric['15m'] > 20) {
+            if (metric['15m'] > {{ansible_processor_cores * 1.5|round('floor')|int}}) {
               return new AlarmStatus(CRITICAL, '15 Minute Load Average is #{15m}');
             }
+            if (metric['15m'] > {{ansible_processor_cores * 1|round('floor')|int}}) {
+              return new AlarmStatus(WARNING, '15 Minute Load Average is #{15m}');
+            }
             return new AlarmStatus(OK, '15 Minute Load Average is #{15m}');
-
-
