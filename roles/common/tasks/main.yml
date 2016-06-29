@@ -3,3 +3,11 @@
 
   - name: Check /usr/lib/rackspace-monitoring-agent/plugins
     file: dest=/usr/lib/rackspace-monitoring-agent/plugins state=directory owner=root group=root
+
+  - name: update rackspace-monitoring-agent
+    # RHEL
+    yum: name=rackspace-monitoring-agent state=latest
+
+    ## To Do
+    # Ubuntu
+    # apt: name=rackspace-monitoring-agent state=latest update_cache=yes
