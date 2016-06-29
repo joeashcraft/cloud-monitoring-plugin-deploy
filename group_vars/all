@@ -1,2 +1,3 @@
 notification_plan: npManaged
-server-status: server-status?auto
+server_status: server-status
+apache_port: 81
