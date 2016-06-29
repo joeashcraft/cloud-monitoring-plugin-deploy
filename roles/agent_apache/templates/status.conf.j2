@@ -1,0 +1,12 @@
+<VirtualHost 127.0.0.1:{{ apache-port }}>
+
+        DocumentRoot /var/www/html
+        <Directory /var/www/html>
+                AllowOverride none
+        </Directory>
+
+        <Location /{{ server-status }}>
+            SetHandler server-status
+        </Location>
+
+</VirtualHost>
