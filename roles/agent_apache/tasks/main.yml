@@ -1,3 +1,11 @@
   - name: Copy apache_status.yaml 
     template: src=apache_status.yaml.j2 dest=/etc/rackspace-monitoring-agent.conf.d/apache_status.yaml
     notify: restart rackspace-monitoring-agent
+
+# RHEL
+  - name: setup status vhost
+    template: src=status.conf.j2 dest=/etc/httpd/vhost.d/status.conf
+    notify: reload apache
+
+## TO DO
+# Ubuntu
