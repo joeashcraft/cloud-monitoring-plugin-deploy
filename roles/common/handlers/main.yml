@@ -1,2 +1,9 @@
   - name: restart rackspace-monitoring-agent
     service: name=rackspace-monitoring-agent state=restarted
+
+  - name: reload apache
+    # RHEL
+    service: name=httpd state=reloaded
+    ## TO DO 
+    # if Ubuntu:
+    # service: name=apache2 state=reloaded
