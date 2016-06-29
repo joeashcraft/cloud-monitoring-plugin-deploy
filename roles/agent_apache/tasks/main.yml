@@ -2,10 +2,11 @@
     template: src=apache_status.yaml.j2 dest=/etc/rackspace-monitoring-agent.conf.d/apache_status.yaml
     notify: restart rackspace-monitoring-agent
 
-# RHEL
+  # RHEL
   - name: setup status vhost
     template: src=status.conf.j2 dest=/etc/httpd/vhost.d/status.conf
     notify: reload apache
 
 ## TO DO
-# Ubuntu
+# Ubuntu vhost
+# patch ports.conf to with "Listen 127.0.0.1:81"
